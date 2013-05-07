@@ -139,14 +139,18 @@ exports.testNewNonNativeObject = function (test) {
  */
 exports.testUndefinedAsParam = function (test) {
 	var code  = '(function (undefined) {}());';
-	var code1 = 'var undefined = 1;';
+	var code1 = 'var undefined;';
+	var code2 = 'var undefined = 1;';
 
 	TestRun(test).test(code);
+
+	// It should also be possible to declare the variable without assigning
+	TestRun(test).test(code1);
 
 	// But it must never tolerate reassigning of undefined
 	TestRun(test)
 		.addError(1, "Expected an identifier and instead saw 'undefined' (a reserved word).")
-		.test(code1);
+		.test(code2);
 
 	test.done();
 };

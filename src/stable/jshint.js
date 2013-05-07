@@ -1432,7 +1432,7 @@ var JSHINT = (function () {
 			}
 		}
 
-		if (fnparam && val === "undefined") {
+		if (val === "undefined" && state.tokens.next.value !== "=") {
 			return val;
 		}
 
